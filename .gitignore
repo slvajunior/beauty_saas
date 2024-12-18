@@ -1,0 +1,28 @@
+# Ambiente Virtual
+venv/
+
+# Arquivos de configurações sensíveis
+.env
+
+# Compilados Python
+*.pyc
+__pycache__/
+
+# Logs e outros arquivos temporários
+*.log
+*.pot
+*.py[co]
+*.sqlite3
+
+# Diretórios do Django
+media/
+static/
+
+# IDEs e Ferramentas
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Sistema Operacional
+Thumbs.db
