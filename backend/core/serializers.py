@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Salao, Servico, Cliente, Agendamento
 from .utils import validar_cnpj
 from django.core.validators import RegexValidator
+from .models import Salao, Servico
 
 
 class SalaoSerializer(serializers.ModelSerializer):
@@ -32,16 +32,4 @@ class SalaoSerializer(serializers.ModelSerializer):
 class ServicoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servico
-        fields = "__all__"
-
-
-class ClienteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Cliente
-        fields = "__all__"
-
-
-class AgendamentoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Agendamento
         fields = "__all__"

@@ -7,6 +7,9 @@ class Salao(models.Model):
     telefone = models.CharField(max_length=20, blank=True, null=True)
     cnpj = models.CharField(max_length=14, unique=True)  # Este campo deve existir
 
+    def __str__(self):
+        return self.nome
+
 
 class Servico(models.Model):
     salao = models.ForeignKey(Salao, related_name="servicos", on_delete=models.CASCADE)
@@ -47,4 +50,9 @@ class Agendamento(models.Model):
     )
 
     def __str__(self):
-        return f"Agendamento de {self.servico.nome} para {self.cliente.nome} no salão {self.salao.nome} em {self.data}"
+        # Formatar a data sem o fuso horário
+        return f"Agendamento de {
+            self.servico.nome} para {
+                self.cliente.nome} no salão {
+                    self.salao.nome} em {
+                        self.data.strftime('%Y-%m-%d %H:%M:%S')}"

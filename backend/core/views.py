@@ -1,12 +1,15 @@
 from rest_framework import viewsets
 from .models import Salao, Servico, Cliente, Agendamento
-from .serializers import SalaoSerializer, ServicoSerializer, ClienteSerializer, AgendamentoSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from .filters import SalaoFilter
+from clientes.serializers import ClienteSerializer, AgendamentoSerializer
+from .serializers import SalaoSerializer, ServicoSerializer
+from rest_framework.test import APITestCase
+from django.urls import reverse
 
 
 class SalaoViewSet(viewsets.ModelViewSet):
@@ -80,3 +83,25 @@ class SalaoListView(generics.ListCreateAPIView):
     serializer_class = SalaoSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = SalaoFilter
+
+
+class SalaoViewTest(APITestCase):
+    def test_create_salao_view(self):
+        url = reverse('salao-list')
+        data = {
+            "nome": "Salão Teste",
+            "endereco": "Rua Teste, 123",
+            # outros campos necessários
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+
+class AgendamentoDetailView(APIView):
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            agendamento = Agendamento.objects.get(pk=pk)
+            serializer = AgendamentoSerializer(agendamento)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Agendamento.DoesNotExist:
+            return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
