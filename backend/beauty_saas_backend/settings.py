@@ -22,6 +22,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # por exemplo, seu frontend em um domínio diferente
     "https://meu-site-frontend.com",
+    "http://127.0.0.1:3000",
 ]
 
 # Quick-start development settings - unsuitable for production

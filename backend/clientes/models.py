@@ -6,7 +6,7 @@ class Cliente(models.Model):
     nome = models.CharField(max_length=255)
     telefone = models.CharField(max_length=15)
     email = models.EmailField(max_length=255, null=True, blank=True)  # Opcional
-    salao = models.ForeignKey(Salao, on_delete=models.CASCADE)  # Relacionamento com o salão, agora sem acento
+    salao = models.ForeignKey(Salao, on_delete=models.CASCADE, null=True, blank=True)
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
